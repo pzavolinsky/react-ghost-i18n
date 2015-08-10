@@ -10,6 +10,12 @@ I18n.locale = {
   '{0}/{1}/{2}': '{1}/{0}/{2}'
 };
 
+// ========================================================================== //
+// Note that the default behavior is implicit translations (i.e. without
+// an explicit <I18n> wrapper). To opt-out of this implicit behavior just
+// call:
+I18n.optOut();
+
 var Test = React.createClass({
   render: function() {
     return <div className="test">
@@ -19,9 +25,35 @@ var Test = React.createClass({
   }
 });
 
+var NotTranslated1 = React.createClass({
+  noI18n: true,
+  render: function() { return <span>This is not translated</span> }
+});
+
+var DontTranslate = { I18n: false };
+var NotTranslated2 = React.createClass({
+  mixins: [DontTranslate],
+  render: function() { return <span>This is not translated</span> }
+});
+
+// ========================================================================== //
+// To opt back in the implicit (default) behavior just call:
+I18n.optIn();
+
+// Components defined from now on will have implicit translations by default:
+var ImplicitTest = React.createClass({
+  render: function() { return <Test {...this.props} />; }
+});
+
+// Note that you can still opt-out of translations on a per-component basis
+// using the noI18n flag in React.createClass({ noI18n: true, ... }) a mixin
+// like DontTranslate above.
+
+// ========================================================================== //
 setTimeout(function() {
   var content = <div>
     <Test title="Simple example">
+      {/* see below for the implicit alternative */}
       <I18n>Hello, World!</I18n>
     </Test>
     <Test title="Translate children">
@@ -56,11 +88,23 @@ setTimeout(function() {
     </Test>
     <Test title="Go crazy (mm/dd/yyyy to dd/mm/yyyy)">
       <I18n>
-        <span i18n-disabled>09</span>/
-        <span i18n-disabled>12</span>/
-        <span i18n-disabled>1900</span>
+        <span>09</span>/<span>12</span>/<span>1900</span>
       </I18n>
     </Test>
+    <Test title="Disabled by noI18n flag">
+      <I18n>
+        <NotTranslated1/>
+      </I18n>
+    </Test>
+    <Test title="Disabled by mixin">
+      <I18n>
+        <NotTranslated2/>
+      </I18n>
+    </Test>
+    <ImplicitTest title="Implicit translations (default behavior)">
+      {/* note the missing <I18n> wrapper! */}
+      Hello, World!
+    </ImplicitTest>
   </div>;
 
   React.render(content, document.getElementById('container'));
