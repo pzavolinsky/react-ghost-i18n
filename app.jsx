@@ -13,7 +13,7 @@ I18n.locale = {
 var Test = React.createClass({
   render: function() {
     return <div className="test">
-      <div className="title">{this.props.title}</div>
+      <div className="title" i18n-disabled>{this.props.title}</div>
       <div className="body">{this.props.children}</div>
     </div>
   }

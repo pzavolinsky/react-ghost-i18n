@@ -1,5 +1,22 @@
 /// Copyright (c) 2015 Patricio Zavolinsky
+(function() {
+  // Wrap every component with an <I18n> unless the component opts-out with
+  // React.createClass({ noI18n: true, ... }).
+  var cc = React.createClass;
+  React.createClass = function(c) {
+    if (c.noI18n) return cc(c);
+    // TODO: support noI18n in mixins
+    c.renderWithoutI18n = c.render;
+    c.render = function() {
+      return <I18n {...this.props}>{this.renderWithoutI18n()}</I18n>
+    }
+    return cc(c);
+  }
+})();
+
+
 var I18n = React.createClass({
+  noI18n: true,
   warn: function(s) {
     s = 'I18n: '+s;
     if (this.props.warn === undefined) return console.warn(s);
@@ -31,7 +48,8 @@ var I18n = React.createClass({
   },
   translateChildren: function(comp) {
     if (!comp.props || !comp.props.children) return null;
-    if (comp.props['i18n-disabled'] !== undefined) return comp.props.children;
+    if (comp.type == I18n && comp != this
+       || comp.props['i18n-disabled'] !== undefined) return comp.props.children;
 
     // === Map : [elements] -> string ======================================= //
     var texts = [];
