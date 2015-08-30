@@ -135,4 +135,4 @@ See [test.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/src/test.jsx
 Demo
 ----
 
-Click [here](http://pzavolinsky.github.io/react-i18n/).
+Click [here](http://pzavolinsky.github.io/react-ghost-i18n/).
