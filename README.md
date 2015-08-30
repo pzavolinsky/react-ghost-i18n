@@ -1,17 +1,33 @@
-react-i18n
-==========
+react-ghost-i18n
+================
 
-I18n is a ReactJs component to augment existing react components with non-intrusive internationalization.
+Ghost I18n is a ReactJs component to augment existing react components with non-intrusive internationalization.
 
 Installation
 ------------
 
-For now just grab [i18n.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/i18n.jsx).
+If you are using react directly in the browser, you can download [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) and include it in you page:
+
+```html
+<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="react-ghost-i18n.min.js"></script>
+```
+
+If you are using CommonJS, just use npm:
+
+```
+npm install react-ghost-i18n
+```
+
+and then, in your scripts:
+```javascript
+var I18n = require('react-ghost-i18n');
+```
 
 Usage
 -----
 
-To use the I18n component, just add [i18n.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/i18n.jsx) before any other components in your compilation pipeline and check the console for missing translation warnings.
+To use the I18n component, just add (or `require`) [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) before any other component in your compilation pipeline and check the console for missing translation warnings.
 
 
 Motivation
@@ -35,7 +51,7 @@ In other words, the idea is that by using `<I18n>` you can keep happily hardcodi
 Usage revisited
 ---------------
 
-By default `<I18n>` will monkypatch `React.createClass` to wrap your components in an `<I18n>`. The `<I18n>` component in turn will recursively translate all the texts of its children components. This means that just by including [i18n.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/i18n.jsx) before any other component in the app, you'll gain full localization with minimal effort.
+By default `<I18n>` will monkypatch `React.createClass` to wrap your components in an `<I18n>`. The `<I18n>` component in turn will recursively translate all the texts of its children components. This means that just by including [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) before any other component in the app, you'll gain full localization with minimal effort.
 
 Alternatively, you could opt-out of this implicit translation behavior on a per-component basis by adding the `no18n` flag:
 
@@ -55,7 +71,7 @@ var MyComponent = React.createClass({
 });
 ```
 
-Note that if you opt-out of the implicit behavior but you still want translations, you'll have to manually wrap your components in a `<I18n>` (plenty of examples in [app.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/app.jsx)).
+Note that if you opt-out of the implicit behavior but you still want translations, you'll have to manually wrap your components in a `<I18n>` (plenty of examples in [test.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/src/test.jsx)).
 
 Configuration
 -------------
@@ -114,7 +130,7 @@ Some translation examples are:
 | `<I18n><input type="button" value="I'm a button input" /></I18n>` | `<span><input type="button" value="Soy un input botón" /></span>` |
 | `<I18n><input type="submit" value="I'm a submit input" /></I18n>` | `<span><input type="button" value="Soy un input submit" /></span>` |
 
-See [app.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/app.jsx) for more examples.
+See [test.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/src/test.jsx) for more examples.
 
 Demo
 ----

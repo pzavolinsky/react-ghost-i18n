@@ -1,0 +1,35 @@
+{
+  "name": "react-ghost-i18n",
+  "version": "1.0.0",
+  "description": "Augment existing react components with non-intrusive internationalization.",
+  "main": "dist/react-ghost-i18n-common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pzavolinsky/react-i18n.git"
+  },
+  "keywords": [
+    "react-component",
+    "i18n",
+    "internationalization",
+    "react",
+    "l10n"
+  ],
+  "author": "Patricio Zavolinsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pzavolinsky/react-i18n/issues"
+  },
+  "homepage": "https://github.com/pzavolinsky/react-i18n",
+  "devDependencies": {
+    "del": "^1.2.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.0",
+    "run-sequence": "^1.1.2"
+  }
+}
