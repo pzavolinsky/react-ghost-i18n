@@ -21,14 +21,14 @@ gulp.task('build', function(cb) {
 });
 
 gulp.task('build-std', function() {
-  return gulp.src('./src/react-ghost-i18n.jsx')
+  return gulp.src('./src/**/*.jsx')
     .pipe(babel())
     .pipe(gulp.dest('./dist'));
 });
 gulp.task('uglify-std', ['build-std'], function() {
   return gulp.src('./dist/react-ghost-i18n.js')
     .pipe(uglify())
-    .pipe(rename('react-ghost-i18n.min.js'))
+    .pipe(rename({ suffix: '.min'}))
     .pipe(gulp.dest('./dist'));
 });
 gulp.task('build-common', function() {

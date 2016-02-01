@@ -1,6 +1,6 @@
 /// Copyright (c) 2015 Patricio Zavolinsky
-var I18n = (function() {
-  var I18n = React.createClass({
+const I18n = (function() {
+  const I18n = React.createClass({
     noI18n: true,
     prop: function(name) {
       return (this.props.i18n && this.props.i18n[name])
@@ -9,13 +9,13 @@ var I18n = (function() {
     },
     warn: function(s) {
       s = 'I18n: '+s;
-      var warn = this.prop('warn');
+      const warn = this.prop('warn');
       if (warn) warn(s);
     },
     translateString: function(s) {
-      var locale = this.prop('locale');
-      var key = (this.prop('prefix') || '') + s;
-      var translation = (typeof locale === 'function')
+      const locale = this.prop('locale');
+      const key = (this.prop('prefix') || '') + s;
+      const translation = (typeof locale === 'function')
         ? locale(key)
         : locale && locale[key];
       if (translation) return translation;
@@ -23,12 +23,12 @@ var I18n = (function() {
       return s;
     },
     translateProps: function(comp, index) {
-      var newProps = { key: index };
-      var tx = function(name) {
+      const newProps = { key: index };
+      const tx = (name) => {
         if (comp.props[name]) {
           newProps[name] = this.translateString(comp.props[name]);
         }
-      }.bind(this);
+      };
       if (typeof comp.type == 'string') {
         tx('title');
         tx('alt');
@@ -38,10 +38,10 @@ var I18n = (function() {
           tx('value');
       }
 
-      var i18nProps = (comp.type == I18n) ? comp : newProps.i18n = {};
-      var copyProp = function(name) {
+      const i18nProps = (comp.type == I18n) ? comp : newProps.i18n = {};
+      const copyProp = (name) => {
         i18nProps[name] = comp.props[name] || this.prop(name);
-      }.bind(this);
+      };
       copyProp('warn');
       copyProp('locale');
       copyProp('prefix');
@@ -53,8 +53,8 @@ var I18n = (function() {
          || comp.props['i18n-disabled'] !== undefined) return comp.props.children;
 
       // === Map : [elements] -> string ======================================= //
-      var texts = [];
-      var oldChildren = [];
+      const texts = [];
+      const oldChildren = [];
       React.Children.forEach(comp.props.children, function(c,i) {
         if (c.props) {
           texts.push('{'+oldChildren.length+'}');
@@ -65,30 +65,30 @@ var I18n = (function() {
       });
 
       // === Translate ======================================================== //
-      var text = texts.join('');
-      var translation = (texts.length == oldChildren.length)
+      const text = texts.join('');
+      const translation = (texts.length == oldChildren.length)
         ? text
         : this.translateString(text);
 
       // === Map : string -> [elements] ======================================= //
-      var newChildren = [];
+      const newChildren = [];
       function addChild(c) { if (c) newChildren.push(c); }
 
       var pos = 0;
-      var re = new RegExp(/\{(\d+)\}/g);
+      const re = new RegExp(/\{(\d+)\}/g);
       var r;
       var matches = 0;
       while (r = re.exec(translation)) {
         ++matches;
         addChild(translation.substring(pos, r.index));
-        var index = parseInt(r[1]);
-        var child = oldChildren[index];
-        child = React.cloneElement(
+        const index = parseInt(r[1]);
+        const child = oldChildren[index];
+        const newChild = React.cloneElement(
           child,
           this.translateProps(child, index),
           this.translateChildren(child)
         );
-        addChild(child);
+        addChild(newChild);
         pos = re.lastIndex;
       }
 
@@ -122,6 +122,9 @@ var I18n = (function() {
     if (!c.mixins) return;
     return filter.call(c.mixins, function(m) { return m.noI18n; });
   }
+
+  I18n.wrap = render => props => <I18n {...props}>{render(props)}</I18n>;
+
   I18n.optIn = function() {
     if (I18n.originalCreateClass) return;
     I18n.originalCreateClass = React.createClass;

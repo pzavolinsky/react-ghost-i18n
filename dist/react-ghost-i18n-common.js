@@ -2,7 +2,7 @@
 
 var React = require("react");
 /// Copyright (c) 2015 Patricio Zavolinsky
-var I18n = (function () {
+var I18n = function () {
   var I18n = React.createClass({
     displayName: 'I18n',
 
@@ -24,12 +24,14 @@ var I18n = (function () {
       return s;
     },
     translateProps: function translateProps(comp, index) {
+      var _this = this;
+
       var newProps = { key: index };
-      var tx = (function (name) {
+      var tx = function tx(name) {
         if (comp.props[name]) {
-          newProps[name] = this.translateString(comp.props[name]);
+          newProps[name] = _this.translateString(comp.props[name]);
         }
-      }).bind(this);
+      };
       if (typeof comp.type == 'string') {
         tx('title');
         tx('alt');
@@ -38,9 +40,9 @@ var I18n = (function () {
       }
 
       var i18nProps = comp.type == I18n ? comp : newProps.i18n = {};
-      var copyProp = (function (name) {
-        i18nProps[name] = comp.props[name] || this.prop(name);
-      }).bind(this);
+      var copyProp = function copyProp(name) {
+        i18nProps[name] = comp.props[name] || _this.prop(name);
+      };
       copyProp('warn');
       copyProp('locale');
       copyProp('prefix');
@@ -81,8 +83,8 @@ var I18n = (function () {
         addChild(translation.substring(pos, r.index));
         var index = parseInt(r[1]);
         var child = oldChildren[index];
-        child = React.cloneElement(child, this.translateProps(child, index), this.translateChildren(child));
-        addChild(child);
+        var newChild = React.cloneElement(child, this.translateProps(child, index), this.translateChildren(child));
+        addChild(newChild);
         pos = re.lastIndex;
       }
 
@@ -123,6 +125,17 @@ var I18n = (function () {
       return m.noI18n;
     });
   }
+
+  I18n.wrap = function (render) {
+    return function (props) {
+      return React.createElement(
+        I18n,
+        props,
+        render(props)
+      );
+    };
+  };
+
   I18n.optIn = function () {
     if (I18n.originalCreateClass) return;
     I18n.originalCreateClass = React.createClass;
@@ -147,6 +160,6 @@ var I18n = (function () {
   I18n.optIn();
 
   return I18n;
-})();
+}();
 
 module.exports = I18n;

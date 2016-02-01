@@ -9,7 +9,8 @@ Installation
 If you are using react directly in the browser, you can download [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) and include it in you page:
 
 ```html
-<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="https://fb.me/react-0.14.7.js"></script>
+<script src="https://fb.me/react-dom-0.14.7.js"></script>
 <script src="react-ghost-i18n.min.js"></script>
 ```
 
@@ -131,6 +132,36 @@ Some translation examples are:
 | `<I18n><input type="submit" value="I'm a submit input" /></I18n>` | `<span><input type="button" value="Soy un input submit" /></span>` |
 
 See [test.jsx](https://raw.github.com/pzavolinsky/react-i18n/master/src/test.jsx) for more examples.
+
+Stateless function components
+-----------------------------
+
+If you are using purely functional components (i.e. "stateless function components"), the implicit behavior won't work and you'll have to manually wrap your functional component with either a non-functional component (i.e. `React.createClass`) or `I18n.wrap`.
+
+Examples follow:
+
+```js
+// Given:
+var Stateless = ({children}) => <b>{children}</b>;
+
+// You can just explicitly wrap it in <I18n>:
+var translated1 = <I18n>
+  <Stateless>Hi!</Stateless>
+</I18n>;
+
+// Or, if you opted-in to the implicit behavior (default) you can wrap it in
+// any other non-functional component:
+var MyComponent = React.createClass({
+  ...
+});
+var translated2 = <MyComponent>
+  <Stateless>Hi!</Stateless>
+</MyComponent>;
+
+// Or you could just wrap the functional component itself:
+var WrappedStateless = I18n.wrap(({children}) => <b>{children}</b>);
+var translated3 = <WrappedStateless>Hi!</WrappedStateless>;
+```
 
 Demo
 ----

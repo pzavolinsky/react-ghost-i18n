@@ -1,3 +1,5 @@
 src
 index.html
-dist/react-ghost-i18n.*
+dist/react-ghost-i18n.js
+dist/react-ghost-i18n.min.js
+dist/test.js

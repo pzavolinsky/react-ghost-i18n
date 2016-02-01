@@ -36,6 +36,9 @@ var NotTranslated2 = React.createClass({
   render: function() { return <span>This is not translated</span> }
 });
 
+var Func = ({children}) => <b>{children}</b>;
+var WrappedFunc = I18n.wrap(({children}) => <b>{children}</b>);
+
 // ========================================================================== //
 // To opt back in the implicit (default) behavior just call:
 I18n.optIn();
@@ -105,7 +108,16 @@ setTimeout(function() {
       {/* note the missing <I18n> wrapper! */}
       Hello, World!
     </ImplicitTest>
+    <Test title="Function (stateless) component (external wrapper)">
+      <I18n><Func>Hello, World!</Func></I18n>
+    </Test>
+    <Test title="Function (stateless) component (I18n.wrap)">
+      <WrappedFunc>Hello, World!</WrappedFunc>
+    </Test>
+    <ImplicitTest title="Function (stateless) component (I18n.wrap)">
+      <Func>Hello, World!</Func>
+    </ImplicitTest>
   </div>;
 
-  React.render(content, document.getElementById('container'));
+  ReactDOM.render(content, document.getElementById('container'));
 }, 1);
