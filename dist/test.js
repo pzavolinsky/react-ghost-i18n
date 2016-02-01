@@ -266,7 +266,7 @@ setTimeout(function () {
     ),
     React.createElement(
       ImplicitTest,
-      { title: 'Function (stateless) component (I18n.wrap)' },
+      { title: 'Function (stateless) component (implicit wrapper)' },
       React.createElement(
         Func,
         null,

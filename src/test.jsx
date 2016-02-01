@@ -114,7 +114,7 @@ setTimeout(function() {
     <Test title="Function (stateless) component (I18n.wrap)">
       <WrappedFunc>Hello, World!</WrappedFunc>
     </Test>
-    <ImplicitTest title="Function (stateless) component (I18n.wrap)">
+    <ImplicitTest title="Function (stateless) component (implicit wrapper)">
       <Func>Hello, World!</Func>
     </ImplicitTest>
   </div>;
