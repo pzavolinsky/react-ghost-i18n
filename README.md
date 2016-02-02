@@ -6,29 +6,29 @@ Ghost I18n is a ReactJs component to augment existing react components with non-
 Installation
 ------------
 
-If you are using react directly in the browser, you can download [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) and include it in you page:
+If you are using react directly in the browser, you can download [react-ghost-i18n-browser.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n-browser.min.js) and include it in you page:
 
 ```html
 <script src="https://fb.me/react-0.14.7.js"></script>
 <script src="https://fb.me/react-dom-0.14.7.js"></script>
-<script src="react-ghost-i18n.min.js"></script>
+<script src="react-ghost-i18n-browser.min.js"></script>
 ```
 
-If you are using CommonJS, just use npm:
+Otherwise, just use npm:
 
 ```
-npm install react-ghost-i18n
+npm install --save react-ghost-i18n
 ```
 
 and then, in your scripts:
 ```javascript
-var I18n = require('react-ghost-i18n');
+import I18n from 'react-ghost-i18n';
 ```
 
 Usage
 -----
 
-To use the I18n component, just add (or `require`) [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) before any other component in your compilation pipeline and check the console for missing translation warnings.
+To use the I18n component, just add [react-ghost-i18n-browser.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n-browser.min.js) (or `import I18n from 'react-ghost-i18n'`) before any other component in your compilation pipeline and check the console for missing translation warnings.
 
 
 Motivation
@@ -52,7 +52,7 @@ In other words, the idea is that by using `<I18n>` you can keep happily hardcodi
 Usage revisited
 ---------------
 
-By default `<I18n>` will monkypatch `React.createClass` to wrap your components in an `<I18n>`. The `<I18n>` component in turn will recursively translate all the texts of its children components. This means that just by including [react-ghost-i18n.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n.min.js) before any other component in the app, you'll gain full localization with minimal effort.
+By default `<I18n>` will monkypatch `React.createClass` to wrap your components in an `<I18n>`. The `<I18n>` component in turn will recursively translate all the texts of its children components. This means that just by including [react-ghost-i18n-browser.min.js](https://raw.github.com/pzavolinsky/react-i18n/master/dist/react-ghost-i18n-browser.min.js) before any other component in the app, you'll gain full localization with minimal effort.
 
 Alternatively, you could opt-out of this implicit translation behavior on a per-component basis by adding the `no18n` flag:
 

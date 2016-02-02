@@ -1,5 +1,9 @@
 src
+spec
 index.html
-dist/react-ghost-i18n.js
-dist/react-ghost-i18n.min.js
+gulpfile.js
+dist/react-ghost-i18n-browser*s
 dist/test.js
+dist/spec
+*.tgz
+.npmignore
