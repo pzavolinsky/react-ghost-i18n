@@ -1,6 +1,6 @@
 {
   "name": "react-ghost-i18n",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Augment existing react components with non-intrusive internationalization.",
   "main": "dist/react-ghost-i18n.js",
   "scripts": {
