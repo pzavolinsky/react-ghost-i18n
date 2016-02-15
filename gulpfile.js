@@ -22,6 +22,7 @@ gulp.task('compile', ['clean'], function() {
 
 gulp.task('bundle', ['compile'], function () {
   return browserify({ entries: ['./dist/react-ghost-i18n.js'] })
+    .transform('exposify', { expose: { react: 'React' } })
     .bundle()
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
     .pipe(source('react-ghost-i18n-browser.js'))
