@@ -39,6 +39,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "browserify-shim": "^3.8.12",
     "react": "^0.14.7"
   },
   "babel": {
