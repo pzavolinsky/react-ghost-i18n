@@ -1,6 +1,6 @@
 {
   "name": "react-ghost-i18n",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Augment existing react components with non-intrusive internationalization.",
   "main": "dist/react-ghost-i18n.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "react": "^0.14.7"
+    "react": "^15.4.0"
   },
   "babel": {
     "presets": [
